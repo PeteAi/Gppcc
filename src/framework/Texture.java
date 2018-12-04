@@ -18,7 +18,7 @@ public class Texture {
 
         BufferedImageLoader loader = new BufferedImageLoader();
         try {
-            player_sheet = loader.LoadImage("/Users/Home/Desktop/Java/Rpg/rsc/Sprite_sheet.png");
+            player_sheet = loader.LoadImage("C:\\Users\\Pete Louis Benz\\Documents\\Gppcc\\rsc\\Sprite_sheet.png");
 
         } catch (Exception e) {
             e.printStackTrace();

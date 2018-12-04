@@ -60,8 +60,7 @@ public class Game extends Canvas implements Runnable {
         tex = new Texture();
 
         BufferedImageLoader loader = new BufferedImageLoader();
-        level = loader.LoadImage("/Users/Home/Desktop/Java/Rpg/rsc/Map.png");
-        //level = loader.LoadImage("H:\\Desktop\\Java\\Rpg\\rsc\\Map.png");
+        level = loader.LoadImage("C:\\Users\\Pete Louis Benz\\Documents\\Gppcc\\rsc\\Map.png");
 
         handler = new Handler();
         cam = new Camera(0, 0);
