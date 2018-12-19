@@ -3,6 +3,7 @@ package objects;
 import framework.GameObject;
 import framework.ObjectId;
 import framework.Texture;
+import org.lwjgl.Sys;
 import window.Game;
 
 import java.awt.*;
@@ -11,7 +12,6 @@ import java.util.LinkedList;
 public class Wall extends GameObject {
 
     Texture tex = Game.getInstance();
-
 
     public Wall(float x, float y,boolean enabled, int textureTypeX,int textureTypeY,int metadata, ObjectId id) {
         super(x, y,enabled,textureTypeX,textureTypeY,metadata, id);
@@ -22,9 +22,8 @@ public class Wall extends GameObject {
     }
 
     public void render(Graphics g) {
-        if (enabled) {
-            g.drawImage(tex.sprite[textureTypeX][textureTypeY], (int)x, (int)y, 32, 32, null);
-        }
+        g.drawImage(tex.sprite[textureTypeX][textureTypeY], (int) x, (int) y, 32, 32, null);
+        System.out.println("hi");
     }
 
     public Rectangle getBounds() {

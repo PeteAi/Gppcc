@@ -73,7 +73,7 @@ public class Game extends Canvas implements Runnable {
 
     //Objects
     public static Handler handler;
-    public static BlocksHandler blocksHandler;
+
     Camera cam;
     static Texture tex;
     private Menu menu;
@@ -100,22 +100,19 @@ public class Game extends Canvas implements Runnable {
         menu = new Menu();
 
         handler = new Handler();
-        blocksHandler = new BlocksHandler();
+
         cam = new Camera(0, 0);
 
         this.addKeyListener(new KeyInput(handler));
         this.addMouseListener(new MouseInput(handler, cam));
 
         //Player
-        handler.object.addFirst(new Player(64, 32, true, 2, 0, 0, blocksHandler, ObjectId.Player));
+        handler.object.addFirst(new Player(64, 32, true, 2, 0, 0, handler, ObjectId.Player));
         handler.object.add(new Bullet(0, 0, false, 0, 0, 0, handler, ObjectId.Bullet));
         //ObjectPoolWall
-        for (int i = 0; i < WALLPOOL; i++) {
-            blocksHandler.addObject(new Wall(0, 0, false, 0, 0, 0, ObjectId.Wall));
-        }
-        chunkloader = new Chunkloader(blocksHandler, "C:\\Users\\Pete Louis Benz\\Desktop\\Java\\Rpg\\rsc\\Map.png");
+
+        chunkloader = new Chunkloader(handler, "C:\\Users\\Pete Louis Benz\\Desktop\\Java\\Rpg\\rsc\\Map.png");
         chunkloader.loadMap();
-        chunkloader.loadLevel(ChunkX,ChunkY);
     }
 
 
@@ -164,7 +161,7 @@ public class Game extends Canvas implements Runnable {
     private void tick() {
         handler.tick();
         if (chunkloader.update()) {
-            chunkloader.loadLevel(ChunkX, ChunkY);
+            System.out.println("New Chunk");
         }
         if (handler.object.getFirst().getId() == ObjectId.Player) {
             cam.tick(handler.object.getFirst());
@@ -193,7 +190,7 @@ public class Game extends Canvas implements Runnable {
         gd2.scale(Scale, Scale);
         if (state == STATE.GAME) {
             gd2.translate(cam.getX(), cam.getY()); //Cam start
-            blocksHandler.render(g);
+
             handler.render(g);
 
 

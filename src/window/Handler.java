@@ -1,10 +1,14 @@
 package window;
 
+import framework.Chunkloader;
 import framework.GameObject;
 import framework.ObjectId;
 
 import java.awt.*;
 import java.util.LinkedList;
+
+import static window.Game.ChunkX;
+import static window.Game.ChunkY;
 
 public class Handler {
 
@@ -18,7 +22,10 @@ public class Handler {
             tempObject.tick(object);
         }
     }
+
     public void render(Graphics g) {
+
+        Chunkloader.renderChunk(g);
 
         for (int i = 2; i < object.size(); i++) {
             tempObject = object.get(i);
@@ -26,10 +33,11 @@ public class Handler {
         }
         object.get(0).render(g);
         object.get(1).render(g);
-        if(tempObject.getId()== ObjectId.Goal){
+        if (tempObject.getId() == ObjectId.Goal) {
             tempObject.render(g);
         }
     }
+
     public void addObject(GameObject object) {
         this.object.add(object);
     }
