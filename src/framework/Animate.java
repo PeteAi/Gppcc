@@ -6,8 +6,10 @@ import java.awt.event.ActionListener;
 
 import static window.Game.planeani;
 import static window.Game.playerani;
+import static window.Game.shoot;
 
 public class Animate implements ActionListener {
+
 
 
     public Animate(int delay) {
@@ -17,16 +19,6 @@ public class Animate implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(playerani <=3){
-            playerani += 1;
-            //System.out.println(playerani);
-        } else {
-            playerani = 2;
-        }
-        if(planeani <=0){
-            planeani +=1;
-        }else{
-            planeani = 0;
-        }
+
     }
 }

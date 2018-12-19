@@ -1,24 +1,30 @@
 package framework;
 
 import window.BufferedImageLoader;
+import window.Game;
 
 import java.awt.image.BufferedImage;
 
 public class Texture {
 
-    SpriteSheet bs, ts;
+    SpriteSheet ts;
 
-    private BufferedImage block_sheet = null;
+
     private BufferedImage player_sheet = null;
 
-    public BufferedImage[] sprite = new BufferedImage[1024];
+    public static BufferedImage[][] sprite = new BufferedImage[32][32];
     public BufferedImage[] plane = new BufferedImage[30];
 
     public Texture() {
 
         BufferedImageLoader loader = new BufferedImageLoader();
         try {
-            player_sheet = loader.LoadImage("C:\\Users\\Pete Louis Benz\\Documents\\Gppcc\\rsc\\Sprite_sheet.png");
+            if (Game.windows) {
+                player_sheet = loader.LoadImage("C:/Users/Pete Louis Benz/Desktop/Java/Rpg/rsc/Sprite_sheet.png");
+            } else {
+                player_sheet = loader.LoadImage("/Users/Home/Desktop/Java/Rpg/rsc/Sprite_sheet.png");
+            }
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -29,11 +35,9 @@ public class Texture {
 
     }
     private void getTextures() {
-        int i = 0;
         for(int y = 0;y<32;y++) {
             for(int x = 0;x<32;x++) {
-                sprite[i] = ts.grabImage(x+1, y+1,32,32);
-                i++;
+                sprite[x][y] = ts.grabImage(x+1, y+1,32,32);
             }
         }
     }

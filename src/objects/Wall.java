@@ -11,11 +11,10 @@ import java.util.LinkedList;
 public class Wall extends GameObject {
 
     Texture tex = Game.getInstance();
-    private int textureType;
 
-    public Wall(float x, float y,boolean enabled, int texturType, ObjectId id) {
-        super(x, y,enabled, id);
-        this.textureType = texturType;
+
+    public Wall(float x, float y,boolean enabled, int textureTypeX,int textureTypeY,int metadata, ObjectId id) {
+        super(x, y,enabled,textureTypeX,textureTypeY,metadata, id);
     }
 
     public void tick(LinkedList<GameObject> object) {
@@ -24,8 +23,7 @@ public class Wall extends GameObject {
 
     public void render(Graphics g) {
         if (enabled) {
-            Graphics2D gd2 = (Graphics2D) g;
-            g.drawImage(tex.sprite[0], (int)x, (int)y, 32, 32, null);
+            g.drawImage(tex.sprite[textureTypeX][textureTypeY], (int)x, (int)y, 32, 32, null);
         }
     }
 
@@ -64,6 +62,10 @@ public class Wall extends GameObject {
     public void setVelY(float velY) {
         this.velY = velY;
     }
+
+    public void setTextureTypeX(int textureTypeX) { this.textureTypeX = textureTypeX; }
+
+    public void setTextureTypeY(int textureTypeY) { this.textureTypeY = textureTypeY; }
 
     public ObjectId getId() {
         return id;
