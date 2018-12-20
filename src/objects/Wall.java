@@ -23,7 +23,6 @@ public class Wall extends GameObject {
 
     public void render(Graphics g) {
         g.drawImage(tex.sprite[textureTypeX][textureTypeY], (int) x, (int) y, 32, 32, null);
-        System.out.println("hi");
     }
 
     public Rectangle getBounds() {

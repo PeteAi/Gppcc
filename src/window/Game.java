@@ -1,5 +1,6 @@
 package window;
 
+import AI.Host;
 import framework.*;
 import objects.*;
 import org.lwjgl.LWJGLException;
@@ -66,6 +67,7 @@ public class Game extends Canvas implements Runnable {
     public static int ChunkX = 0;
     public static int ChunkY = 0;
 
+    public static int Tick = 0;
 
     int enabledObjects = 0;
     static int collectpool = 30;
@@ -113,6 +115,7 @@ public class Game extends Canvas implements Runnable {
 
         chunkloader = new Chunkloader(handler, "C:\\Users\\Pete Louis Benz\\Desktop\\Java\\Rpg\\rsc\\Map.png");
         chunkloader.loadMap();
+        Host.setup(0, 0, 300, 300);
     }
 
 
@@ -170,7 +173,11 @@ public class Game extends Canvas implements Runnable {
             controller.poll();
             framework.Controller.update();
         }
-
+        if (Tick < 60) {
+            Tick++;
+        } else {
+            Tick = 0;
+        }
     }
 
     public void render() {
@@ -181,7 +188,6 @@ public class Game extends Canvas implements Runnable {
         }
         Graphics g = bs.getDrawGraphics();
         ////////////Draw here
-
         //background
         g.setColor(Color.black);
         g.fillRect(0, 0, getWidth(), getHeight());
@@ -190,12 +196,9 @@ public class Game extends Canvas implements Runnable {
         gd2.scale(Scale, Scale);
         if (state == STATE.GAME) {
             gd2.translate(cam.getX(), cam.getY()); //Cam start
-
             handler.render(g);
-
-
             gd2.translate(-cam.getX(), -cam.getY());//Cam end
-
+            Host.drawAndUpdate(g);
             if (debugmode) {
                 byte space = 15;
                 byte tab = 10;
@@ -224,6 +227,8 @@ public class Game extends Canvas implements Runnable {
         } else if (state == STATE.MENU) {
             menu.render(g);
         }
+
+
         ////////////Draw end
         g.dispose();
         bs.show();
